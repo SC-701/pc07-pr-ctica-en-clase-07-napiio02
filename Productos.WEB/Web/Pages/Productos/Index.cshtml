@@ -1,0 +1,54 @@
+﻿@page
+@model Web.Pages.Productos.IndexModel
+@{
+}
+
+<h1 class="mb-4">Listado de productos</h1>
+
+@if (Model.productos != null && Model.productos.Any())
+{
+    <div class="text-center mb-4">
+        <a type="button" class="btn btn-primary" asp-page="./Agregar">Agregar</a>
+    </div>
+
+    <div class="row g-4">
+        @foreach (var producto in Model.productos)
+        {
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card shadow-sm producto-card">
+                    <div class="card-body p-3">
+
+                        <h5 class="card-title mb-1">@producto.Nombre</h5>
+
+                        <p class="text-muted mb-2">
+                            ₡@producto.Precio
+                        </p>
+
+                        <p class="mb-3">
+                            Stock: @producto.Stock
+                        </p>
+
+                        <div class="d-flex gap-2">
+                            <a class="btn btn-primary btn-sm"
+                               asp-page="./Detalle"
+                               asp-route-id="@producto.Id">Detalle</a>
+
+                            <a class="btn btn-warning btn-sm"
+                               asp-page="./Editar"
+                               asp-route-id="@producto.Id">Editar</a>
+
+                            <a class="btn btn-danger btn-sm"
+                               asp-page="./Eliminar"
+                               asp-route-id="@producto.Id">Eliminar</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>No hay productos registrados.</p>
+}

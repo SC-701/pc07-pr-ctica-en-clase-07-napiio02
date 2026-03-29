@@ -1,0 +1,26 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<div class="d-flex justify-content-center align-items-center" style="min-height: 85vh; background: linear-gradient(135deg, #f8fafc, #e2e8f0);">
+
+    <div class="card shadow-lg border-0 text-center p-5" style="max-width: 420px; width: 100%; border-radius: 20px;">
+
+        <h1 class="mb-3" style="font-weight: 600;">Hola!!</h1>
+
+        <p class="text-muted mb-4">
+            Agregar, editar, eliminar y visualizar productos.
+        </p>
+
+        <a asp-page="/Productos/Index"
+           class="btn btn-lg w-100 text-white"
+           style="background-color: #6366F1; border-radius: 12px; transition: 0.3s;">
+
+            Ir a Productos
+        </a>
+
+    </div>
+
+</div>

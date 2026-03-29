@@ -1,0 +1,71 @@
+﻿@page
+@model Web.Pages.Productos.AgregarModel
+@{
+}
+<h1>Agregar producto</h1>
+<form method="post">
+    <div class="form-group">
+        <label for="categorias">Categoría</label>
+        <select id="categorias" asp-for="categoriaSeleccionada" class="form-select"
+                asp-items="Model.categorias" onchange="fetchSubcategorias()">
+            <option value="">Seleccione una categoría</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="subcategorias">Subcategoría</label>
+        <select asp-for="producto.IdSubCategoria" class="form-select"
+                asp-items="Model.subcategorias" id="subcategorias">
+            <option value="">Seleccione una subcategoría</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label class="control-label" asp-for="producto.Nombre"></label>
+        <input class="form-control" asp-for="producto.Nombre" />
+        <span class="text-danger" asp-validation-for="producto.Nombre"></span>
+    </div>
+    <div class="form-group">
+        <label class="control-label" asp-for="producto.Descripcion"></label>
+        <input class="form-control" asp-for="producto.Descripcion" />
+        <span class="text-danger" asp-validation-for="producto.Descripcion"></span>
+    </div>
+    <div class="form-group">
+        <label class="control-label" asp-for="producto.Precio"></label>
+        <input class="form-control" asp-for="producto.Precio" />
+        <span class="text-danger" asp-validation-for="producto.Precio"></span>
+    </div>
+    <div class="form-group">
+        <label class="control-label" asp-for="producto.Stock"></label>
+        <input class="form-control" asp-for="producto.Stock" />
+        <span class="text-danger" asp-validation-for="producto.Stock"></span>
+    </div>
+    <div class="form-group">
+        <label class="control-label" asp-for="producto.CodigoBarras"></label>
+        <input class="form-control" asp-for="producto.CodigoBarras" />
+        <span class="text-danger" asp-validation-for="producto.CodigoBarras"></span>
+    </div>
+    <br />
+    <a type="button" class="btn btn-primary" asp-page="./Index">Regresar</a>
+    <button type="submit" class="btn btn-success">Guardar</button>
+</form>
+@section Scripts {
+    <script>
+        async function fetchSubcategorias() {
+            const categoriaId = document.getElementById("categorias").value;
+            if (!categoriaId) { return; }
+            try {
+                const respuesta = await fetch(`?handler=ObtenerSubcategorias&categoriaID=${categoriaId}`);
+                const subcategorias = await respuesta.json();
+                const subcategoriasSelect = document.getElementById("subcategorias");
+                subcategoriasSelect.innerHTML = '<option value="">Seleccione una subcategoría</option>';
+                subcategorias.forEach(sub => {
+                    const option = document.createElement("option");
+                    option.value = sub.id;
+                    option.text = sub.nombre;
+                    subcategoriasSelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error obteniendo las subcategorías', error);
+            }
+        }
+    </script>
+}
