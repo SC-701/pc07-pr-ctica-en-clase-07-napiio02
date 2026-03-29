@@ -33,6 +33,10 @@ namespace API
             builder.Services.AddHttpClient<ITipoCambioServicio, TipoCambioServicio>();
             builder.Services.AddScoped<ITipoCambioReglas, TipoCambioReglas>();
             builder.Services.AddScoped<IConfiguracion, Configuracion>();
+            builder.Services.AddScoped<ICategoriaFlujo, CategoriaFlujo>();
+            builder.Services.AddScoped<ICategoriaDA, CategoriaDA>();
+            builder.Services.AddScoped<ISubCategoriaFlujo, SubCategoriaFlujo>();
+            builder.Services.AddScoped<ISubCategoriaDA, SubCategoriaDA>();
 
             var app = builder.Build();
 

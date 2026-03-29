@@ -1,0 +1,18 @@
+﻿
+using System.ComponentModel.DataAnnotations;
+
+namespace Abstracciones.Modelos
+{
+    public class SubCategoriaBase
+    {
+        [Required(ErrorMessage = "La propiedad nombre es requerida")]
+        [StringLength(80, ErrorMessage = "La propiedad nombre debe ser mayor a 2 caracteres y menor a 80", MinimumLength = 2)]
+        public string Nombre { get; set; }
+    }
+
+    public class SubCategoriaResponse : SubCategoriaBase
+    {
+        public Guid Id { get; set; }
+        public Guid IdCategoria { get; set; }
+    }
+}
